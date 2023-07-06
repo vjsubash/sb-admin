@@ -34,11 +34,11 @@ useEffect(()=>{
     alert("Invalid User Id")
     navigate('/dashboard')
   }
-},[])
+},[params.id,users,navigate])
 
 //1. Without dependancy array useEffect(()=>{}) --> triggers everytime whena a state changes
 //2. With Empty Dependancy array useEffect(()=>{},[]) --> triggers only for the first time of component rendering
-//3. With Dependancy Array useEffect(()=>{},[name,email]) ->> trrigers only when name or email changes
+//3. Eith Dependancy Array useEffect(()=>{},[name,email]) ->> trrigers only when name or email changes
 
 return <div className='container'>
    <div className="d-sm-flex align-items-center justify-content-between mb-4">
