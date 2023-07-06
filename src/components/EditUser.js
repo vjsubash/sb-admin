@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -35,6 +35,10 @@ useEffect(()=>{
     navigate('/dashboard')
   }
 },[])
+
+//1. Without dependancy array useEffect(()=>{}) --> triggers everytime whena a state changes
+//2. With Empty Dependancy array useEffect(()=>{},[]) --> triggers only for the first time of component rendering
+//3. With Dependancy Array useEffect(()=>{},[name,email]) ->> trrigers only when name or email changes
 
 return <div className='container'>
    <div className="d-sm-flex align-items-center justify-content-between mb-4">
