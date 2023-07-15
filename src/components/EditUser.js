@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useContext } from 'react'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate, useParams } from 'react-router-dom';
+import { UserContext } from './Context/UserContextComponent';
 
-function EditUser({users,setUsers}) {
+function EditUser() {
 
+  let context = useContext(UserContext)
   let params = useParams()
   let [name,setName] = useState()
   let [email,setEmail] = useState()
@@ -14,27 +16,27 @@ function EditUser({users,setUsers}) {
   let navigate = useNavigate()
 
 let handleSave = ()=>{
-  let newArray = [...users]
+  let newArray = [...context.users]
   newArray.splice(params.id,1,{name,email,mobile,address,batch})
-  setUsers(newArray)
+  context.setUsers(newArray)
   navigate('/dashboard')
 }
 
 useEffect(()=>{
-  if(params.id < users.length)
+  if(params.id < context.users.length)
   {
-    setName(users[params.id].name)
-    setEmail(users[params.id].email)
-    setMobile(users[params.id].mobile)
-    setAddress(users[params.id].address)
-    setBatch(users[params.id].batch)
+    setName(context.users[params.id].name)
+    setEmail(context.users[params.id].email)
+    setMobile(context.users[params.id].mobile)
+    setAddress(context.users[params.id].address)
+    setBatch(context.users[params.id].batch)
   }
   else
   {
     alert("Invalid User Id")
     navigate('/dashboard')
   }
-},[params.id,users,navigate])
+},[params.id,context.users,navigate])
 
 //1. Without dependancy array useEffect(()=>{}) --> triggers everytime whena a state changes
 //2. With Empty Dependancy array useEffect(()=>{},[]) --> triggers only for the first time of component rendering
